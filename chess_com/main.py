@@ -67,6 +67,7 @@ def set_data_values(data: dict, player: dict, opponent: dict, pgn_dict: dict,
 	data['Moves'].append(max(pgn_dict['Moves'].keys()))
 	data['Date'].append(pgn_dict['EndDate'])
 	data['Event'].append(pgn_dict['Event'])
+	data['Tournament'].append(pgn_dict['Tournament'])
 	data['Time Class'].append(time_class)
 	data['Time Control'].append(time_control)
 	data['FEN'].append(fen)
@@ -80,7 +81,7 @@ if __name__ == '__main__':
 		'Opponent':[],'Opponent Rating':[],'Opponent Nationality':[],
 		'Opponent Side':[],'Opponent Result':[],'Opponent First Move':[],
 		'Opening':[],'Variation':[],'Termination':[],'Moves':[],'Date':[],
-		'Event':[],'Time Class':[],'Time Control':[],'FEN':[],
+		'Tournament':[],'Event':[],'Time Class':[],'Time Control':[],'FEN':[],
 	}
 	
 	for url in archived_games(ARCHIVE_ENDPOINT):
@@ -90,6 +91,8 @@ if __name__ == '__main__':
 			opponent = player_nationality(COUNTRY_CODES, nationality_dict, opponent)
 			if 'pgn' in games and 'ECOUrl' in games['pgn']:
 				pgn = pgn_to_dict(games['pgn'])
+				if 'Tournament' not in pgn:
+					pgn['Tournament'] = 'None'
 				set_data_values(all_data, player, opponent, pgn, games['time_control'], 
 								games['time_class'], games['fen'])
 	store_game_data(all_data)

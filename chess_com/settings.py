@@ -10,7 +10,7 @@ NATIONALLITY_FILE = 'nationality.csv'
 GAME_DATA_FILE = 'chess_data_shaash.csv'
 
 #USERNAME
-USERNAME = os.environ['USERNAME']
+USERNAME = 'dontmesswithme_2'
 
 #ARCHIVE ENDPOINT USED FOR API REQUESTS
 #https://www.chess.com/news/view/published-data-api#pubapi-endpoint-games-archive-list
